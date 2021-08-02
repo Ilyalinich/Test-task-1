@@ -17,7 +17,7 @@ function ProductCard({offer}) {
       {isDiscount && <span className="product-card__lable product-card__lable--sale">{`-${discount}%`}</span>}
       {action === ActionsType.HIT && <span className="product-card__lable product-card__lable--hit">{action}</span>}
       {action === ActionsType.NEW && <span className="product-card__lable product-card__lable--new">{action}</span>}
-      <Link className="product-card__link" to={link}>
+      <Link className="product-card__link product-card__img__container" to={link}>
         <img className="product-card__img" src={image} width="220" height="240" alt={name}/>
       </Link>
       <p className="product-card__description">
