@@ -1,16 +1,31 @@
 import React, {useState, useEffect} from 'react';
 import './products-list.css';
-import ProductCard from '../product-card/product-card';
-import {createMockOffers} from '../../mock/mock-offers';
+import Product from '../product/product';
+import {createMockProducts} from '../../mock/mock-products';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
+import {ActionsType} from '../../constant';
+import ProductHit from '../product-hit/product-hit';
+import ProductNew from '../product-new/product-new';
 
-const FAKE_LOADING_TIME = 500;
+
+const FAKE_LOADING_TIME = 2000;
 
 const fetchProducts = () => new Promise((resolve) => {
   setTimeout(() => {
-    resolve(createMockOffers());
+    resolve(createMockProducts());
   }, FAKE_LOADING_TIME);
 });
+
+const getProductByActionType = (actionType, product) => {
+  switch (actionType) {
+    case ActionsType.HIT:
+      return <ProductHit product={product} />;
+    case ActionsType.NEW:
+      return <ProductNew product={product} />;
+    default:
+      return <Product product={product} />;
+  }
+};
 
 
 function ProductsList() {
@@ -34,6 +49,7 @@ function ProductsList() {
       })));
   };
 
+
   useEffect(() => {
     loadProducts();
   }, []);
@@ -54,25 +70,26 @@ function ProductsList() {
     isProductsLoading || window.addEventListener('scroll', checkPosition);
     isProductsLoading || window.addEventListener('resize', checkPosition);
 
-
     return () => {
       window.removeEventListener('scroll', checkPosition);
       window.removeEventListener('resize', checkPosition);
     };
   }, [isProductsLoading]);
 
+
   return (
-    <ul className="products__list">
-      {
-        products.map((offer, index) => (
-          <ProductCard
-            key={index.toString()}
-            offer={offer}
-          />
-        ))
-      }
+    <>
+      <ul className="products__list">
+        {
+          products.map((product, index) => (
+            <li key={index.toString()}>
+              {getProductByActionType(product.action, product)}
+            </li>
+          ))
+        }
+      </ul>
       {isProductsLoading && <LoadingSpinner />}
-    </ul>
+    </>
   );
 }
 
