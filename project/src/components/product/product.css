@@ -85,6 +85,7 @@
   box-sizing: border-box;
   overflow: hidden;
 
+  font-weight: 500;
   line-height: 19px;
 
   flex-shrink: 0;
@@ -96,29 +97,25 @@
   max-height: 200px;
 }
 
-.product__price {
+.product__price-container {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
 
   margin-bottom: 22px;
   padding: 0 9px;
 }
 
-.product__standart-price {
-  margin-right: 21px;
-
-  font-weight: bold;
+.product__actual-price {
   font-size: 16px;
   line-height: 19px;
+  margin-right: 21px;
 }
 
-.product__standart-price--with-discount {
+.product__actual-price--with-discount {
   color: var(--color-orange);
 }
 
-.product__discount-price {
-  margin: 0;
-
-  font-size: 14px;
+.product__old-price {
   text-decoration-line: line-through;
 }

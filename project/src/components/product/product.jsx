@@ -22,9 +22,11 @@ function Product({actionLabelclassName = '', product}) {
           <img className="product__img" src={image} width="220" height="240" alt="Product"/>
         </div>
       </Link>
-      <div className="product__price">
-        <b className={`product__standart-price ${isDiscount ? 'product__standart-price--with-discount' : ''}`}>{price} &#8381;</b>
-        {isDiscount && <span className="product__discount-price">{priceDiskount} &#8381;</span>}
+      <div className="product__price-container">
+        <b className={`product__actual-price ${isDiscount ? 'product__actual-price--with-discount' : ''}`}>
+          {isDiscount ? priceDiskount : price} &#8381;
+        </b>
+        {isDiscount && <span className="product__old-price">{price} &#8381;</span>}
       </div>
       <Link className="product__link button" to={link}>Подробнее</Link>
     </article>
